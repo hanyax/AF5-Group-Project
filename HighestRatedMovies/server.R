@@ -1,56 +1,52 @@
 library(shiny)
 library(plotly)
 library(dplyr)
+library("httr")
+library(jsonlite)
+library(dplyr)
 
-data <- read.table('./data/cereal.tsv', header = TRUE)
-
+topRatedMovies <- function(rating) {
+  key <- "7a6c78ba5a3085b57bf936f116cd1259"
+  base <- paste0("https://api.themoviedb.org/3/discover/movie/?certification_country=US&certification=",rating,"&sort_by=popularity.desc")
+  query.params <- list(api_key = key)
+  response <- GET(base, query = query.params)
+  body <- content(response, "text")
+  results <- fromJSON(body)
+  info <- results$results
+  df <- data.frame(info$title, info$popularity, stringsAsFactors = FALSE)
+  return (df)
+}
 
 
 shinyServer(function(input, output) {
-  output$scatter <- renderPlotly({
+  output$barChart <- renderPlotly({
     
     # set X and Y axis variables
     x <- list(
-      title = "Calories"
+      title = "Movies"
     )
     y <- list(
-      title = "Ratings"
+      title = "Popularity Rating"
     )
     
     # change graph based on widget of selecting fat amount
-    if(input$select == '0') {
-      data <- filter(data, fat == '0')
+    if(input$select == 'G') {
+     option <- "G"
     }
-    if(input$select == '1') {
-      data <- filter(data, fat == '1')
+    if(input$select == 'PG') {
+      option <- "PG"
     }
-    if(input$select == '2') {
-      data <- filter(data, fat == '2')
+    if(input$select == 'PG13') {
+      option <- "PG13"
     }
-    if(input$select == '3') {
-      data <- filter(data, fat == '3')
+    if(input$select == 'R') {
+      option <- "R"
     }
-    if(input$select == '5') {
-      data <- filter(data, fat == '5')
-    }
-    
-    # change graph colors based on radio buttons
-    if(input$radio == 'sodium'){
-      dataColor = data$sodium
-      colorSet = "Set1"
-    }
-    if(input$radio == 'sugars'){
-      dataColor = data$sugars
-      colorSet = "Set2"
-    }
-    if(input$radio == 'fiber'){
-      dataColor = data$fiber 
-      colorSet = "Set3"
-    }
+    data <- topRatedMovies(option)
     
     # display the graph
-    plot_ly(data, x = data$calories, y = data$rating, mode = "markers", text = ~paste("Cereal Name: ", data$name), color = dataColor, colors= colorSet) %>% 
-      layout(title = 'Calories and Ratings of Various Cereals', xaxis=x, yaxis=y)
+    plot_ly(data, x = data$info.title, y = data$info.popularity, type = "bar", color = data$info.vote_average) %>% 
+      layout(title = 'Movies', xaxis=x, yaxis=y)
   })
   
   
