@@ -5,7 +5,7 @@ library(plotly)
 shinyUI(fluidPage(
   
   # title of page
-  titlePanel("Applet"),
+  titlePanel("Movies By Rating"),
 
   # create side panel which contains two widgets 
   sidebarPanel(

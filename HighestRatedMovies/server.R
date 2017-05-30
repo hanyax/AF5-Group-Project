@@ -3,7 +3,8 @@ library(plotly)
 library(dplyr)
 library("httr")
 library(jsonlite)
-library(dplyr)
+library(RColorBrewer)
+
 
 topRatedMovies <- function(rating) {
   key <- "7a6c78ba5a3085b57bf936f116cd1259"
@@ -22,11 +23,15 @@ shinyServer(function(input, output) {
   output$barChart <- renderPlotly({
     
     # set X and Y axis variables
-    x <- list(
-      title = "Movies"
-    )
     y <- list(
       title = "Popularity Rating"
+    )
+    ax <- list(
+      title = "Movies (hover to see names)",
+      zeroline = FALSE,
+      showline = FALSE,
+      showticklabels = FALSE,
+      showgrid = FALSE
     )
     
     # change graph based on widget of selecting fat amount
@@ -43,10 +48,13 @@ shinyServer(function(input, output) {
       option <- "R"
     }
     data <- topRatedMovies(option)
+    data$info.title <- factor(data$info.title, levels = unique(data$info.title)[order(data$info.popularity, decreasing = TRUE)])
     
     # display the graph
-    plot_ly(data, x = data$info.title, y = data$info.popularity, type = "bar", color = data$info.vote_average) %>% 
-      layout(title = 'Movies', xaxis=x, yaxis=y)
+    plot_ly(data, x = data$info.title, y = data$info.popularity, type = "bar", 
+            marker = list(color = colorRampPalette(brewer.pal(11,"Spectral"))(20))) %>% 
+      layout(title = 'Top 20 Most Popular Movies By Rating', xaxis= ax, yaxis=y)
+      
   })
   
   
