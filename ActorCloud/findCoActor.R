@@ -15,7 +15,7 @@ toDataframe <- function(name, topN){
     count[[i]] <- actorList[[i]]
   }
   df <- data.frame(actorIDs, count, stringsAsFactors = FALSE)
-  selected <- df %>% arrange(-count) %>% top_n(topN)
+  selected <- df %>% arrange(-count)
   selected <- selected[-c(1), ]
   selected <- selected %>% slice(1:topN) 
   actorNames <- character(topN)
