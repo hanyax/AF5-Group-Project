@@ -53,7 +53,7 @@ shinyServer(function(input, output) {
     # display the graph
     plot_ly(data, x = data$info.title, y = data$info.popularity, type = "bar", 
             marker = list(color = colorRampPalette(brewer.pal(11,"Spectral"))(20))) %>% 
-      layout(title = 'Top 20 Most Popular Movies By Rating', xaxis= ax, yaxis=y)
+      layout(title = 'Top 20 Current Most Popular Movies By Rating', xaxis= ax, yaxis=y)
       
   })
   
