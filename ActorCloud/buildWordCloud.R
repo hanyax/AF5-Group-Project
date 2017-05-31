@@ -1,4 +1,4 @@
-source("../ActorCloud/findCoActor.R")
+source("../AF5-Group-Project/ActorCloud/findCoActor.R")
 library(wordcloud)
 
 buildWordCloud <- function(name, topN) {
