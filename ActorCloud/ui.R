@@ -15,7 +15,7 @@ shinyUI(fluidPage(
       sliderInput("topN",
                    "Top Actor/Atress He/She Worked With",
                    min = 1,
-                   max = 20,
+                   max = 16,
                    value = 10)
       ),
     
