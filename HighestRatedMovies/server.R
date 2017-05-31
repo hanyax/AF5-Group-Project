@@ -34,7 +34,7 @@ shinyServer(function(input, output) {
       showgrid = FALSE
     )
     
-    # change graph based on widget of selecting fat amount
+    # change graph based on widget of selecting rating amount
     if(input$select == 'G') {
      option <- "G"
     }
@@ -50,7 +50,7 @@ shinyServer(function(input, output) {
     data <- topRatedMovies(option)
     data$info.title <- factor(data$info.title, levels = unique(data$info.title)[order(data$info.popularity, decreasing = TRUE)])
     
-    # display the graph
+    # display the bar graph based on ratings
     plot_ly(data, x = data$info.title, y = data$info.popularity, type = "bar", 
             marker = list(color = colorRampPalette(brewer.pal(11,"Spectral"))(20))) %>% 
       layout(title = 'Top 20 Current Most Popular Movies By Rating', xaxis= ax, yaxis=y)

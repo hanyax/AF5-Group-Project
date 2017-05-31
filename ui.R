@@ -1,6 +1,8 @@
 # ui.R
 library(shiny)
 library(plotly)
+install.packages("wordcloud")
+
 shinyUI(navbarPage('More About Movies',
                    
                 tabPanel('plot',
@@ -24,6 +26,28 @@ shinyUI(navbarPage('More About Movies',
                        plotOutput("plot")
                      )
                    )
-                )
+                ),
+                
+                tabPanel('barChart',
+                         # title of page
+                         titlePanel("Movies By Rating"),
+                         
+                         # create side panel which contains two widgets 
+                         sidebarPanel(
+                           
+                           # drop down bar widget
+                           selectInput("select", label = h3("Select Rating"),
+                                       choices = list("G" = "G","PG" = "PG", "PG13" = "PG13", "R" = "R"),
+                                       selected = "PG")
+                         ),
+                         
+                         # panel for scatterplot
+                         mainPanel(
+                           plotlyOutput('barChart')
+                         )   
+                         
+                         )
                    
 ))
+
+
