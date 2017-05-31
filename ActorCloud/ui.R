@@ -6,7 +6,7 @@ shinyUI(fluidPage(
   # Application title
   titlePanel("CoActors Cloud"),
   
-  # Sidebar with a slider input for number of bins 
+  # Sidebar with a slider input for number of co-actor displayed
   sidebarLayout(
     sidebarPanel(
       
@@ -19,7 +19,7 @@ shinyUI(fluidPage(
                    value = 10)
       ),
     
-    # Show a plot of the generated distribution
+    # Show a plot of the generated wordcloud
     mainPanel(
        plotOutput("plot")
     )

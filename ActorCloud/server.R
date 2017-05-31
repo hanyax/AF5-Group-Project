@@ -3,8 +3,7 @@ source("../ActorCloud/buildWordCloud.R")
 source("../ActorCloud/findCoActor.R")
 
 function(input, output) {
-  # Make the wordcloud drawing predictable during a session
-  
+  # Generate wordcloud with buildWordCloud function
   output$plot <- renderPlot({
     name <- input$textInput
     topN <- input$topN

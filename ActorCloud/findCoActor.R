@@ -2,6 +2,8 @@ library("httr")
 library(jsonlite)
 library(dplyr)
 
+# put the list of actor_id/co-apperence time in a dataframe 
+# for building a wordcloud
 toDataframe <- function(name, topN){
   actorList = list()
   movies = findActorMovieID(name)
@@ -26,6 +28,7 @@ toDataframe <- function(name, topN){
   return(selected)
 }
 
+# Take in a actor id and return the name it represent
 toActorName <- function(id) {
   key <- "7a6c78ba5a3085b57bf936f116cd1259"
   base <- paste("https://api.themoviedb.org/3/person/",id,sep = "")
@@ -36,6 +39,8 @@ toActorName <- function(id) {
   return(results[["name"]])
 }
 
+# Use the movie_id vector to find all the other actors/actresses who are also start in those movie
+# put them in a list where list key is the actor id and value is the time of co-apperence
 findCast <- function(movieID, actorList) {
   key <- "7a6c78ba5a3085b57bf936f116cd1259"
   base <- paste("https://api.themoviedb.org/3/movie/", movieID, "/credits",sep = "")
@@ -57,7 +62,7 @@ findCast <- function(movieID, actorList) {
   return (actorList)
 }
 
-# find all the movie id that the actor is in 
+# put all the movie's id that the input actor was in a vector and return it
 findActorMovieID <- function(name) {
   key <- "7a6c78ba5a3085b57bf936f116cd1259"
   base <- "https://api.themoviedb.org/3/discover/movie?"
@@ -72,6 +77,7 @@ findActorMovieID <- function(name) {
   return (movies)
 }
 
+# Get the actor id for input actor string and return the id string
 findActorID <- function(name) {
   key <- "7a6c78ba5a3085b57bf936f116cd1259"
   base <- "https://api.themoviedb.org/3/search/person?"
