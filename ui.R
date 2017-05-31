@@ -5,7 +5,7 @@ install.packages("wordcloud")
 
 shinyUI(navbarPage('More About Movies',
                    
-                tabPanel('plot',
+                tabPanel('Co Actor Cloud',
                    # Application title
                    titlePanel("CoActors Cloud"),
                    # Sidebar with a slider input for number of co-actor displayed
@@ -28,7 +28,7 @@ shinyUI(navbarPage('More About Movies',
                    )
                 ),
                 
-                tabPanel('barChart',
+                tabPanel('Movies By Rating',
                          # title of page
                          titlePanel("Movies By Rating"),
                          
