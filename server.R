@@ -33,6 +33,20 @@ topMoviesByYearGenre <- function(year, genre) {
   df <- data.frame(info$title,info$release_date, info$overview, info$popularity, stringsAsFactors = FALSE)
 }
 
+getMovieDF <- function(lang) {
+  key <- "cc04f8a15efff3b286a9eb5a51308304"
+  base <- paste0("https://api.themoviedb.org/3/discover/movie?")
+  query.params <- list(with_original_language = lang, api_key = key)
+  response <- GET(base, query = query.params)
+  body <- content(response, "text")
+  results <- fromJSON(body)
+  info <- results$results
+  info$genre_ids <- as.character(info$genre_ids)
+  data <- data.frame(info$title, info$release_date, info$vote_average, info$popularity, info$vote_count, info$original_language, stringsAsFactors = FALSE)
+  View(data)
+  return(data)
+}
+
 function(input, output) {
   # Generate wordcloud with buildWordCloud function
   output$plot <- renderPlot({
@@ -106,7 +120,7 @@ function(input, output) {
     }
     
     # set data to the language selected
-    data <- getMovies(language)
+    data <- getMovieDF(language)
     
     # create a bubble plot that shows whether or not a movie is worth watching based on vote_average, poularity and vote_count
     plot_ly(data, x = ~data$info.vote_average, y = ~data$info.popularity, text = ~data$info.title, type = 'scatter', mode = 'markers', size = "Release Date:" ~data$info.vote_count, color = ~data$info.release_date, colors = 'Paired',
@@ -125,6 +139,8 @@ function(input, output) {
       colnames(data)[2] <- "Release Date"
       colnames(data)[3] <- "Overview"
       colnames(data)[4] <- "Popularity Rating"
+      
+      data <- data[1:10,]
       
       data
 
