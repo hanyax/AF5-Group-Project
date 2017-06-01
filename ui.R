@@ -35,7 +35,7 @@ shinyUI(navbarPage(
                     font-family: 'Raleway';
                     font-weight: 500;
                     line-height: 1.0;
-                    font-size: 16px;
+                    font-size: 24px;
                     padding-left: 650px;
                     }
 
