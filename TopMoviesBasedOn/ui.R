@@ -2,7 +2,7 @@ library(shiny)
 
 shinyUI(fluidPage(
   
-  titlePanel("Top Movie By Year and Genre"),
+  titlePanel("Top 20 Movies By Year and Genre"),
   
   sidebarPanel(
     selectInput("year", label = h3("Select Year"),
