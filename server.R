@@ -21,7 +21,7 @@ topRatedMovies <- function(rating) {
   return (df)
 }
 
-# Function to retrieve information from the API
+# function to retrieve information from the API (genres)
 topMoviesByYearGenre <- function(year, genre) {
   key <- "7a6c78ba5a3085b57bf936f116cd1259"
   base <- paste0("https://api.themoviedb.org/3/discover/movie?with_genres=", genre, "&primary_release_year=", year ,"&sort_by=popularity.desc")
@@ -33,6 +33,7 @@ topMoviesByYearGenre <- function(year, genre) {
   df <- data.frame(info$title,info$release_date, info$overview, info$popularity, stringsAsFactors = FALSE)
 }
 
+# function to retreive select information from discover API
 getMovieDF <- function(lang) {
   key <- "cc04f8a15efff3b286a9eb5a51308304"
   base <- paste0("https://api.themoviedb.org/3/discover/movie?")
@@ -94,6 +95,7 @@ function(input, output) {
     
   })
   
+  # bubble/scatter plot 
   output$scatter <- renderPlotly({
     
     # set X and Y axis variables
@@ -130,21 +132,21 @@ function(input, output) {
              yaxis=y,
              showlegend = FALSE)
   })
+  # output table and siplay movies by year and genre
+  output$table <- renderTable({
     
-    output$table <- renderTable({
-      
-      data <- topMoviesByYearGenre(input$year, input$genre)
-      
-      colnames(data)[1] <- "Title"
-      colnames(data)[2] <- "Release Date"
-      colnames(data)[3] <- "Overview"
-      colnames(data)[4] <- "Popularity Rating"
-      
-      data <- data[1:10,]
-      
-      data
-
-    })
+    data <- topMoviesByYearGenre(input$year, input$genre)
     
+    colnames(data)[1] <- "Title"
+    colnames(data)[2] <- "Release Date"
+    colnames(data)[3] <- "Overview"
+    colnames(data)[4] <- "Popularity Rating"
+    
+    data <- data[1:10,]
+    
+    data
+    
+  })
+  
 }
 

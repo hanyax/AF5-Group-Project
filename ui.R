@@ -178,7 +178,7 @@ shinyUI(navbarPage(
              tableOutput("table")
            )
   )
-           
+  
 ))
 
 
