@@ -81,7 +81,9 @@ shinyUI(navbarPage(
                            "Top Actor/Actress He/She Worked With",
                            min = 1,
                            max = 16,
-                           value = 10)
+                           value = 10),
+               
+               actionButton("go", "Plot")
              ),
              
              # Show a plot of the generated wordcloud
