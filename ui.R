@@ -34,9 +34,9 @@ shinyUI(navbarPage(
                     padding-left: 650px;
                     }
 
-                    img {
+                    movie {
                     height: 100px;
-                    width: 250px;
+                    width: 200px;
                     }
     
                     
@@ -46,7 +46,6 @@ shinyUI(navbarPage(
   
                 tabPanel ('Welcome',
                           mainPanel(
-                            
                             h1("More About Movies"),
                            
                             h2("Created by: Zhanna Voloshina, Zach Holle, Anushree Shukla, Shawn Xu, Andy Johnson "),
@@ -55,10 +54,7 @@ shinyUI(navbarPage(
                               ratings of movies by time, and more! Click through our interactive visualizations to find out more! 
                               "),
                             br(),
-                            img(src='moviedb.png', align = "right")
-                            
-                            
-                            
+                            img(src='moviedb.png', align = "right", id = "movie")
                           )
                 ),
                    
@@ -72,7 +68,7 @@ shinyUI(navbarPage(
                        textInput("textInput", label = h3("Actor/Actress Name"), value = "Johnny Depp"),
                        
                        sliderInput("topN",
-                                   "Top Actor/Atress He/She Worked With",
+                                   "Top Actor/Actress He/She Worked With",
                                    min = 1,
                                    max = 16,
                                    value = 10)
@@ -80,7 +76,9 @@ shinyUI(navbarPage(
                      
                      # Show a plot of the generated wordcloud
                      mainPanel(
+                       div(
                        plotOutput("plot")
+                       )
                      )
                    )
                 ),

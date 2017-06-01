@@ -28,7 +28,7 @@ function(input, output) {
     topN <- input$topN
     buildWordCloud(name, topN)
   })
-  
+  options = list(height = 1000)
   # Generate bar chart based on movie ratings
   output$barChart <- renderPlotly({
     
