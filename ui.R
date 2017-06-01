@@ -28,9 +28,10 @@ shinyUI(navbarPage(
                     }
 
                     p {
-                    font-family: 'Raleway',
-                    font-weight: 400;
+                    font-family: 'Raleway';
+                    font-weight: 500;
                     line-height: 1.0;
+                    font-size: 16px;
                     padding-left: 650px;
                     }
 
@@ -46,15 +47,16 @@ shinyUI(navbarPage(
   
                 tabPanel ('Welcome',
                           mainPanel(
+                            img(src='smalllogo.png', align = "right"),
                             h1("More About Movies"),
                            
                             h2("Created by: Zhanna Voloshina, Zach Holle, Anushree Shukla, Shawn Xu, Andy Johnson "),
                             br(),
                             p("Our interactive platform allows you to explore information about current actors, top current movies,
                               ratings of movies by time, and more! Click through our interactive visualizations to find out more! 
-                              "),
-                            br(),
-                            img(src='moviedb.png', align = "right", id = "movie")
+                              ")
+                            
+                           
                           )
                 ),
                    
@@ -87,7 +89,7 @@ shinyUI(navbarPage(
                          # title of page
                          titlePanel("Movies By Rating"),
                          
-                         # create side panel which contains two widgets 
+                         # create side panel which contains one widgets 
                          sidebarPanel(
                            
                            # drop down bar widget
