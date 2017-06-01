@@ -6,7 +6,7 @@ library("plotly")
 shinyUI(fluidPage(
   
   # Application title
-  titlePanel("Movies "),
+  titlePanel("Movies by Language"),
   
   sidebarPanel(
     # drop down widget to selec language
