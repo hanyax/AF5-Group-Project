@@ -132,7 +132,7 @@ shinyUI(navbarPage(
   ),
   
   tabPanel("Movies By Year and Genre",
-           titlePanel("Top 20 Movies By Year and Genre"),
+           titlePanel("Top 10 Movies By Year and Genre"),
            
            sidebarPanel(
              selectInput("year", label = h3("Select Year"),

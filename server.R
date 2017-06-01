@@ -126,6 +126,8 @@ function(input, output) {
       colnames(data)[3] <- "Overview"
       colnames(data)[4] <- "Popularity Rating"
       
+      data <- data[1:10,]
+      
       data
 
     })
