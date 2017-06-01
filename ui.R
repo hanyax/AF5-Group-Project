@@ -112,6 +112,30 @@ shinyUI(navbarPage(
            )
   ),
   
+  tabPanel('Actor/Actress Career Arc',
+           # title of page
+           titlePanel("Timeline of Movie Popularities"),
+           
+           # create side panel which contains one widgets 
+           sidebarLayout(
+             sidebarPanel(
+               fluidPage(
+                 
+                 # Copy the line below to make a text input box
+                 textInput("text", label = h3("Actor/Actress FullName"), value = "Emma Stone"),
+                 
+                 hr(),
+                 fluidRow(column(3, verbatimTextOutput("value")))
+                 
+               )
+             ),
+             
+             # Show a plot of the Time vs. popularity of Movies
+             mainPanel(
+               plotlyOutput("scatterAndLine")
+             )
+  )),
+  
   tabPanel('Movies By Language',
            
            # title of the page

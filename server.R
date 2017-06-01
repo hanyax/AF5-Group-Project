@@ -7,6 +7,7 @@ library("RColorBrewer")
 
 source("../AF5-Group-Project/ActorCloud/buildWordCloud.R")
 source("../AF5-Group-Project/ActorCloud/findCoActor.R")
+source("../AF5-Group-Project/InternationalMoviesMap/Scripts.R")
 
 # function to retrieve information from the API  
 topRatedMovies <- function(rating) {
@@ -146,6 +147,29 @@ function(input, output) {
       
       data
 
+    })
+    
+    output$scatterAndLine <- renderPlotly({ 
+      
+      # This calls up the function to convert the Actor/Actresses name to an ID
+      id <- getActorID(input$text)
+      
+      # This calls up a function to get a data frame of the 20 most recent movie the Actor/Actress
+      # has been credited on
+      movies <- getActorMovies(id)
+      
+      font <- list(family = "Courier New, monospace", size = 20)
+      
+      y.axis <- list(title = "Average Rating (0-10)", titlefont = font)
+      x.axis <- list(title = "Release Date (Hover for Date)", titlefont = font, showticklabels = FALSE)
+      
+      # This renders the graph
+      plot_ly(movies, x= ~movies$release_date, y = ~movies$vote_average, type = 'scatter', mode = 'lines+markers', text = movies$original_title, marker = list(size=15, line = list(color = 'rgba(0, 0, 0)', width = 2)), color = movies$vote_average, colors = "Greens") %>%
+        layout(title = paste0(input$text, "'s Career Arc"),
+               yaxis = y.axis,
+               xaxis = x.axis
+        )
+      
     })
   
 }

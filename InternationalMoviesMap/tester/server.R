@@ -17,7 +17,7 @@ source("../Scripts.R")
 shinyServer(function(input, output) {
   
   # This puts out a scatter plot based on the inputted Actor/Actress
-  output$scatter <- renderPlotly({ 
+  output$scatterAndLine <- renderPlotly({ 
     
     # This calls up the function to convert the Actor/Actresses name to an ID
     id <- getActorID(input$text)
