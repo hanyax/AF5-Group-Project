@@ -133,20 +133,20 @@ function(input, output) {
              showlegend = FALSE)
   })
   # output table and siplay movies by year and genre
-  output$table <- renderTable({
-    
-    data <- topMoviesByYearGenre(input$year, input$genre)
-    
-    colnames(data)[1] <- "Title"
-    colnames(data)[2] <- "Release Date"
-    colnames(data)[3] <- "Overview"
-    colnames(data)[4] <- "Popularity Rating"
-    
-    data <- data[1:10,]
-    
-    data
-    
-  })
+    output$table <- renderTable({
+      
+      data <- topMoviesByYearGenre(input$year, input$genre)
+      
+      colnames(data)[1] <- "Title"
+      colnames(data)[2] <- "Release Date"
+      colnames(data)[3] <- "Overview"
+      colnames(data)[4] <- "Popularity Rating"
+      
+      data <- data[1:10,]
+      
+      data
+
+    })
   
 }
 
