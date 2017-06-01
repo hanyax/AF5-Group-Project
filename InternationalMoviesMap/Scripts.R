@@ -5,13 +5,9 @@ library(ggplot2)
 library(jsonlite)
 library("httr")
 
-# api key is 07c7b544cd225d44012fadeac87086aa
 
 
-base.api <- "https://api.themoviedb.org/3/person/"
-list <- api_key = key, query=""
-ryan.g <- GET()
-
+# This function takes in the name of an Actor/Actress and returns the ID from the API
 getActorID <- function(name) {
   key <- "07c7b544cd225d44012fadeac87086aa"
   base <- "https://api.themoviedb.org/3/search/person?"
@@ -24,10 +20,13 @@ getActorID <- function(name) {
   #View(body)
 }
 
+
+# This funciton takes in the ID of an Actor/Actress and returns the 20 most recent
+# movies they have been in
 getActorMovies <- function(id) {
   key <- "07c7b544cd225d44012fadeac87086aa"
   base <- paste0("https://api.themoviedb.org/3/discover/movie?")
-  query.params <- list(api_key = key, with_cast = id)
+  query.params <- list(api_key = key, with_cast = id, sort_by = "release_date.desc", vote_count.gte = 100)
   response <- GET(base, query = query.params)
   text <- content(response, "text")
   results <- fromJSON(text)
@@ -37,19 +36,6 @@ getActorMovies <- function(id) {
 }
 
 
-
-
-getActorTVShows <- function(id) {
-  key <- "07c7b544cd225d44012fadeac87086aa"
-  base <- paste0("https://api.themoviedb.org/3/discover/tv?")
-  query.params <- list(api_key = key, with_cast = id)
-  response <- GET(base, query = query.params)
-  text <- content(response, "text")
-  results <- fromJSON(text)
-  results <- flatten(results$results)
-  
-  return(results)
-}
 
 
 

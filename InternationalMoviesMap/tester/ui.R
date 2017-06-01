@@ -8,6 +8,10 @@
 #
 
 library(shiny)
+library(dplyr)
+library(plotly)
+library(ggplot2)
+
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
@@ -18,16 +22,20 @@ shinyUI(fluidPage(
   # Sidebar with a slider input for number of bins 
   sidebarLayout(
     sidebarPanel(
-       sliderInput("bins",
-                   "Number of bins:",
-                   min = 1,
-                   max = 50,
-                   value = 30)
+      fluidPage(
+        
+        # Copy the line below to make a text input box
+        textInput("text", label = h3("Actor/Actress FullName"), value = "Emma Stone"),
+        
+        hr(),
+        fluidRow(column(3, verbatimTextOutput("value")))
+        
+      )
     ),
     
     # Show a plot of the generated distribution
     mainPanel(
-       plotOutput("distPlot")
+       plotlyOutput("scatter")
     )
   )
 ))

@@ -8,19 +8,44 @@
 #
 
 library(shiny)
-
+library(plotly)
+library(dplyr)
+library(ggplot2)
+library(RColorBrewer)
+source("../Scripts.R")
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
-   
-  output$distPlot <- renderPlot({
+  
+  # This puts out a scatter plot based on the inputted Actor/Actress
+  output$scatter <- renderPlotly({ 
     
-    # generate bins based on input$bins from ui.R
-    x    <- faithful[, 2] 
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+    # This calls up the function to convert the Actor/Actresses name to an ID
+    id <- getActorID(input$text)
+      
+    # This calls up a function to get a data frame of the 20 most recent movie the Actor/Actress
+    # has been credited on
+    movies <- getActorMovies(id)
     
-    # draw the histogram with the specified number of bins
-    hist(x, breaks = bins, col = 'darkgray', border = 'white')
+    font <- list(family = "Courier New, monospace", size = 20)
     
-  })
+    y.axis <- list(title = "Average Rating (0-10)", titlefont = font)
+    x.axis <- list(title = "Release Date (Hover for Date)", titlefont = font, showticklabels = FALSE)
+    
+    # This renders the graph
+    plot_ly(movies, x= ~movies$release_date, y = ~movies$vote_average, type = 'scatter', 
+            mode = 'lines+markers', text = movies$original_title, marker = list(size=15), color = movies$vote_average) %>%
+      
+        layout(title = paste0(input$text, "'s Career Arc"),
+               yaxis = y.axis,
+               xaxis = x.axis
+      )
+  
+    
+    
+    
+    })
+  
   
 })
+  
+
