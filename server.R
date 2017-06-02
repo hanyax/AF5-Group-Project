@@ -164,7 +164,7 @@ function(input, output) {
       x.axis <- list(title = "Release Date (Hover for Date)", titlefont = font, showticklabels = FALSE)
       
       # This renders the graph
-      plot_ly(movies, x= ~movies$release_date, y = ~movies$vote_average, type = 'scatter', mode = 'lines+markers', text = movies$original_title, marker = list(size=15, line = list(color = 'rgba(0, 0, 0)', width = 2)), color = movies$vote_average, colors = "Greens") %>%
+      plot_ly(movies, x= ~movies$release_date, y = ~movies$vote_average, type = 'scatter', mode = 'lines+markers', text = movies$original_title, marker = list(size=15, line = list(color = 'rgba(0, 0, 0)', width = 2)), color = "Green") %>%
         layout(title = paste0(input$text, "'s Career Arc"),
                yaxis = y.axis,
                xaxis = x.axis
