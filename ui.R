@@ -6,8 +6,6 @@ library("dplyr")
 library("httr")
 library("jsonlite")
 
-
-
 shinyUI(navbarPage(
   tags$head(
     tags$style(HTML("
@@ -43,6 +41,10 @@ shinyUI(navbarPage(
                     height: 100px;
                     width: 200px;
                     }
+
+                    table {
+                    background-color: white;
+                    }
     
                     
                     "))
@@ -64,7 +66,7 @@ shinyUI(navbarPage(
             )
   ),
   
-  tabPanel('Co Actor Cloud',
+  tabPanel('Co-Actor Cloud',
            # Application title
            titlePanel("CoActors Cloud"),
            # Sidebar with a slider input for number of co-actor displayed
@@ -73,22 +75,19 @@ shinyUI(navbarPage(
                
                textInput("textInput", label = h3("Actor/Actress Name"), value = "Johnny Depp"),
                
-               # Since the API limits the number of call made in short period of time, 
-               # the program will crash becuase the api call 
-               # is rejected if the slidebar is moved too often. 
-               # Please allow about 5 seconds bewteen each move of the slide bar.
                sliderInput("topN",
                            "Top Actor/Actress He/She Worked With",
                            min = 1,
                            max = 16,
-                           value = 10)
+                           value = 10),
+               
+               actionButton("go", "Go")
              ),
              
              # Show a plot of the generated wordcloud
              mainPanel(
-               div(
-                 plotOutput("plot")
-               )
+                plotOutput("plot")
+               
              )
            )
   ),
