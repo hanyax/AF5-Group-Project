@@ -6,8 +6,6 @@ library("dplyr")
 library("httr")
 library("jsonlite")
 
-
-
 shinyUI(navbarPage(
   tags$head(
     tags$style(HTML("
@@ -64,7 +62,7 @@ shinyUI(navbarPage(
             )
   ),
   
-  tabPanel('Co Actor Cloud',
+  tabPanel('Co-Actor Cloud',
            # Application title
            titlePanel("CoActors Cloud"),
            # Sidebar with a slider input for number of co-actor displayed
@@ -84,9 +82,8 @@ shinyUI(navbarPage(
              
              # Show a plot of the generated wordcloud
              mainPanel(
-               div(
-                 plotOutput("plot")
-               )
+                plotOutput("plot")
+               
              )
            )
   ),

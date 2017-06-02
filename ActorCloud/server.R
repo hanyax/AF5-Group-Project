@@ -8,6 +8,6 @@ function(input, output) {
   
   # Generate wordcloud with buildWordCloud function
   output$plot <- renderPlot({
-    #buildWordCloud(name(), topN())
+    buildWordCloud(name(), topN())
   })
 }

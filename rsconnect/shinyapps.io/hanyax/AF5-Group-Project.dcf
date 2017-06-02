@@ -2,9 +2,9 @@ name: AF5-Group-Project
 title: AF5-Group-Project
 account: hanyax
 server: shinyapps.io
-appId: 185544
-bundleId: 849781
+appId: 185593
+bundleId: 849791
 url: https://hanyax.shinyapps.io/AF5-Group-Project/
-when: 1496363157.69093
+when: 1496363849.83681
 asMultiple: FALSE
 asStatic: FALSE
