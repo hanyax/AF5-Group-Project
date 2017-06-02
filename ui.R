@@ -86,8 +86,9 @@ shinyUI(navbarPage(
              
              # Show a plot of the generated wordcloud
              mainPanel(
-                plotOutput("plot")
-               
+                plotOutput("plot"),
+                h2(helpText("The color of the name changes with the number. The name with same color means the same
+                         apperence time"))
              )
            )
   ),
