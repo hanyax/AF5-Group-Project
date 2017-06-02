@@ -41,6 +41,10 @@ shinyUI(navbarPage(
                     height: 100px;
                     width: 200px;
                     }
+
+                    table {
+                    background-color: white;
+                    }
     
                     
                     "))
