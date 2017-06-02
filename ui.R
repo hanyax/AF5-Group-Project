@@ -73,17 +73,13 @@ shinyUI(navbarPage(
                
                textInput("textInput", label = h3("Actor/Actress Name"), value = "Johnny Depp"),
                
-               # Since the API limits the number of call made in short period of time, 
-               # the program will crash becuase the api call 
-               # is rejected if the slidebar is moved too often. 
-               # Please allow about 5 seconds bewteen each move of the slide bar.
                sliderInput("topN",
                            "Top Actor/Actress He/She Worked With",
                            min = 1,
                            max = 16,
                            value = 10),
                
-               actionButton("go", "Plot")
+               actionButton("go", "Go")
              ),
              
              # Show a plot of the generated wordcloud

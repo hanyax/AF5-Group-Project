@@ -18,7 +18,9 @@ shinyUI(fluidPage(
                    "Top Actor/Atress He/She Worked With",
                    min = 1,
                    max = 16,
-                   value = 10)
+                   value = 10),
+      
+      actionButton("go", "Go")
       ),
     
     # Show a plot of the generated wordcloud
