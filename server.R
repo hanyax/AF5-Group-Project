@@ -51,10 +51,14 @@ getMovieDF <- function(lang) {
 
 function(input, output) {
   # Generate wordcloud with buildWordCloud function
-  output$plot <- renderPlot({
-    name <- input$textInput
-    topN <- input$topN
-    buildWordCloud(name, topN)
+    output$plot <- renderPlot({
+    topN <- eventReactive(input$go, {input$topN})
+    name <- eventReactive(input$go, {input$textInput})
+    
+    # Generate wordcloud with buildWordCloud function
+    output$plot <- renderPlot({
+      buildWordCloud(name(), topN())
+    })
   })
   
   options = list(height = 1000)
